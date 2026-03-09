@@ -180,7 +180,9 @@ if config_env() == :prod and is_nil(env!("SKIP_RUNTIME_CONFIG", :string, nil)) d
   voice_rtp_probe = env!("VOICE_RTP_PROBE", :boolean, false)
   voice_rtp_probe_timeout_ms = env!("VOICE_RTP_PROBE_TIMEOUT_MS", :integer, 6_000)
   eda_dave = env!("EDA_DAVE", :boolean, true)
-  browser_basic_auth_required = env!("BASIC_AUTH_REQUIRED", :boolean, true)
+   # Set BASIC_AUTH_REQUIRED=false to skip the browser user/password prompt (e.g. on Render).
+  # If true, set BASIC_AUTH_USERNAME and BASIC_AUTH_PASSWORD in the environment and use those when the browser asks.
+  browser_basic_auth_required = env!("BASIC_AUTH_REQUIRED", :boolean, false)
 
   ffmpeg_available = not is_nil(System.find_executable("ffmpeg"))
 
